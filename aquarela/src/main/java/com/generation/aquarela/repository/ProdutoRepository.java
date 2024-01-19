@@ -11,5 +11,5 @@ import com.generation.aquarela.model.Produto;
 public interface ProdutoRepository extends JpaRepository<Produto, Long>{
 	
 	public List <Produto> findAllByNomeContainingIgnoreCase(@Param("nome") String nome);
-	public List <Produto> findAllByPrecoContainingIgnoreCase(@Param("%preco%") BigDecimal preco);
+	public List <Produto> findAllByPreco(@Param("preco") BigDecimal preco);
 }

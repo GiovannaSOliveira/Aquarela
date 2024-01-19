@@ -50,14 +50,14 @@ public class ProdutoController {
 				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
 	
-	@GetMapping("produto/{produto}")
-	public ResponseEntity <List<Produto>> getByTitle(@PathVariable String nome){
+	@GetMapping("nome/{nome}")
+	public ResponseEntity <List<Produto>> getByNome(@PathVariable String nome){
 		return ResponseEntity.ok(produtoRepository.findAllByNomeContainingIgnoreCase(nome));
 	}
 	
 	@GetMapping("preco/{preco}")
 	public ResponseEntity <List<Produto>> getByString(@PathVariable BigDecimal preco){
-		return ResponseEntity.ok(produtoRepository.findAllByPrecoContainingIgnoreCase(preco));
+		return ResponseEntity.ok(produtoRepository.findAllByPreco(preco));
 	}
 	
 	@PostMapping
