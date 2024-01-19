@@ -1,9 +1,16 @@
 package com.generation.aquarela.model;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -24,6 +31,10 @@ public class Categoria {
 	@NotBlank (message = " A Descrição do produto é obrigatória! ")
 	@Size(min = 20, max = 100, message = "Adicione a descrição do produto que deve conter no mínimo 20 caracteres e no máximo 100 caracteres!")
 	private String descricaocat;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria", cascade = CascadeType.REMOVE)
+    @JsonIgnoreProperties("categoria")
+    private List<Produto> produto;
 
 	public Long getId() {
 		return id;
@@ -49,5 +60,13 @@ public class Categoria {
 		this.descricaocat = descricaocat;
 	}
 	
+	public List<Produto> getProduto() {
+		return produto;
+	}
 
+	public void setProduto(List<Produto> produto) {
+		this.produto = produto;
+	}
+	
+	 
 }
