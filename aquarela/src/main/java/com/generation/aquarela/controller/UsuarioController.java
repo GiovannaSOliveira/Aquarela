@@ -40,18 +40,17 @@ public class UsuarioController {
 		
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("/id/{id}")
 	public ResponseEntity<Usuario> getById(@PathVariable Long id) {
 		return usuarioRepository.findById(id)
 			.map(resposta -> ResponseEntity.ok(resposta))
 			.orElse(ResponseEntity.notFound().build());
 	}
 	
-	@GetMapping("/{nome}")
-	public ResponseEntity<Usuario> getByNome(@PathVariable String nome) {
-		return usuarioRepository.findByNome(nome)
-			.map(resposta -> ResponseEntity.ok(resposta))
-			.orElse(ResponseEntity.notFound().build());
+	@GetMapping("/nome/{nome}")
+	public ResponseEntity<List<Usuario>> getByNome(@PathVariable String nome) {
+		return ResponseEntity.ok(usuarioRepository.findAllByNomeContainingIgnoreCase(nome));
+
 	}
 	
 	@PostMapping("/logar")
