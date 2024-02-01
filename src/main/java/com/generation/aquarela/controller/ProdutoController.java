@@ -60,7 +60,7 @@ public class ProdutoController {
 		return ResponseEntity.ok(produtoRepository.findAllByPreco(preco));
 	}
 	
-	@PostMapping
+	@PostMapping("/cadastrar")
 	public ResponseEntity<Produto> post (@Valid @RequestBody Produto produto){
 		
 		if(categoriaRepository.existsById(produto.getCategoria().getId())) {
@@ -72,7 +72,7 @@ public class ProdutoController {
 		}		
 	}
 	
-	@PutMapping
+	@PutMapping("/atualizar")
 	public ResponseEntity<Produto> put (@Valid @RequestBody Produto produto){
 		if(produtoRepository.existsById(produto.getId())) {
 			
